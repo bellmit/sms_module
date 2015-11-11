@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c) 2015. Lorem ipsum dolor sit amet, consectetur adipiscing elit.                                      ~
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.                       ~
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.                                                  ~
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.                    ~
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.                                                                      ~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <task:executor id="asyncExecutor" pool-size="5-100"
+                   queue-capacity="2000" keep-alive="300" rejection-policy="CALLER_RUNS"/>
+    <task:annotation-driven executor="asyncExecutor" mode="proxy"/>
+
+    <task:scheduler id="scheduler" pool-size="10"/>
+    <!--<task:scheduled-tasks scheduler="scheduler">-->
+        <!--<task:scheduled ref="rePushSmsStatusServer" method="task" cron="0 0/5 * * * ?"/>-->
+    <!--</task:scheduled-tasks>-->
+
+</beans>
+

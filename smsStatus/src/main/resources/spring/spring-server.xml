@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c) 2015. Lorem ipsum dolor sit amet, consectetur adipiscing elit.                                      ~
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.                       ~
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.                                                  ~
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.                    ~
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.                                                                      ~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 聚通達通道 -->
+    <bean id="jTDChannelImpl" class="com.zy.sms.status.service.impl.jutongda.JTDChannelImpl">
+        <property name="userName" value="${BJ.JTD.YD.SW.USERNAME}"/>
+        <property name="userPassword" value="${BJ.JTD.YD.SW.PWD}"/>
+    </bean>
+
+    <bean id="jTDLTChannelImpl" class="com.zy.sms.status.service.impl.jutongda.JTDLTChannelImpl">
+        <property name="userName" value="${BJ.JTD.LT.USERNAME}"/>
+        <property name="userPassword" value="${BJ.JTD.LT.PWD}"/>
+    </bean>
+
+    <bean id="jTDYDChannelImpl" class="com.zy.sms.status.service.impl.jutongda.JTDYDChannelImpl">
+        <property name="userName" value="${BJ.JTD.YD.USERNAME}"/>
+        <property name="userPassword" value="${BJ.JTD.YD.PWD}"/>
+    </bean>
+
+    <!-- 中山點對點 -->
+    <bean id="zSP2PChannelImpl" class="com.zy.sms.status.service.impl.similar.ZSP2PChannelImpl">
+        <property name="account" value="${ZS.P2P.CHANNEL.ACCOUNT}"/>
+        <property name="password" value="${ZS.P2P.CHANNEL.PASSWORD}"/>
+        <property name="url" value="${ZS.P2P.CHANNEL.STATUS.URL}"/>
+        <property name="userid" value="${ZS.P2P.CHANNEL.USERID}"/>
+    </bean>
+
+    <!-- 天下暢通 -->
+    <bean id="tXCTChannelImpl" class="com.zy.sms.status.service.impl.similar.TXCTChannelImpl">
+        <property name="account" value="${BJ.CT.CHANNEL.ACCOUNT}"/>
+        <property name="password" value="${BJ.CT.CHANNEL.PASSWORD}"/>
+        <property name="url" value="${BJ.CT.CHANNEL.STATUS.URL}"/>
+        <property name="userid" value="${BJ.CT.CHANNEL.USERID}"/>
+    </bean>
+
+    <!-- 廣州朗月 -->
+    <bean id="gZLYDXChannelImpl" class="com.zy.sms.status.service.impl.langyue.GZLYDXChannelImpl">
+        <property name="account" value="${GZ.LY.DX.CHANNEL.ACCOUNT}"/>
+        <property name="password" value="${GZ.LY.DX.CHANNEL.PASSWORD}"/>
+        <property name="url" value="${GZ.LY.CHANNEL.STATUS.URL}"/>
+        <property name="userid" value="${GZ.LY.DX.CHANNEL.USERID}"/>
+    </bean>
+
+    <bean id="gZLYLTChannelImpl" class="com.zy.sms.status.service.impl.langyue.GZLYLTChannelImpl">
+        <property name="account" value="${GZ.LY.LT.CHANNEL.ACCOUNT}"/>
+        <property name="password" value="${GZ.LY.LT.CHANNEL.PASSWORD}"/>
+        <property name="url" value="${GZ.LY.CHANNEL.STATUS.URL}"/>
+        <property name="userid" value="${GZ.LY.LT.CHANNEL.USERID}"/>
+    </bean>
+
+    <bean id="gZLYYDChannelImpl" class="com.zy.sms.status.service.impl.langyue.GZLYYDChannelImpl">
+        <property name="account" value="${GZ.LY.YD.CHANNEL.ACCOUNT}"/>
+        <property name="password" value="${GZ.LY.YD.CHANNEL.PASSWORD}"/>
+        <property name="url" value="${GZ.LY.CHANNEL.STATUS.URL}"/>
+        <property name="userid" value="${GZ.LY.YD.CHANNEL.USERID}"/>
+    </bean>
+
+    <bean id="gZLYVIPChannelImpl" class="com.zy.sms.status.service.impl.langyue.GZLYVIPChannelImpl">
+        <property name="password" value="${GZ.LY.YD.VIPCHANNEL.PASSWORD}"/>
+        <property name="url" value="${GZ.LY.VIPCHANNEL.STATUS.URL}"/>
+        <property name="userid" value="${GZ.LY.YD.VIPCHANNEL.ACCOUNT}"/>
+    </bean>
+
+    <!-- 東莞聯通 -->
+    <bean id="dGLTChannelImpl" class="com.zy.sms.status.service.impl.others.DGLTChannelImpl"/>
+
+    <!-- 佛山飛信通道 -->
+    <bean id="fXYDChannelImpl" class="com.zy.sms.status.service.impl.others.FXYDChannelImpl"/>
+
+
+</beans>

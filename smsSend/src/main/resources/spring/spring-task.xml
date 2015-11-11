@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c) 2015. Lorem ipsum dolor sit amet, consectetur adipiscing elit.                                      ~
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.                       ~
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.                                                  ~
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.                    ~
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.                                                                      ~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <!-- 北京聚通達 通道發送線程池 -->
+    <task:executor id="BJ_JTD_CHANNEL_Executor" pool-size="100"
+                   queue-capacity="2000" keep-alive="300" rejection-policy="CALLER_RUNS"/>
+
+    <!-- 東莞聯通 通道發送線程池 -->
+    <task:executor id="DG_UNICOM_CHANNEL_Executor" pool-size="100"
+                   queue-capacity="2000" keep-alive="300" rejection-policy="CALLER_RUNS"/>
+
+    <!-- 廣州朗月 通道發送線程池 -->
+    <task:executor id="GZ_LY_CHANNE_Executor" pool-size="100"
+                   queue-capacity="2000" keep-alive="300" rejection-policy="CALLER_RUNS"/>
+
+    <!-- 天下暢通 通道發送線程池 -->
+    <task:executor id="BJ_CT_CHANNEL_Executor" pool-size="100"
+                   queue-capacity="2000" keep-alive="300" rejection-policy="CALLER_RUNS"/>
+
+    <!-- 中山點對點 通道發送線程池 -->
+    <task:executor id="ZS_P2P_CHANNEL_Executor" pool-size="100"
+                   queue-capacity="2000" keep-alive="300" rejection-policy="CALLER_RUNS"/>
+
+    <!-- 飛信移動 通道發送線程池 -->
+    <task:executor id="FX_YD__CHANNEL_Executor" pool-size="100"
+                   queue-capacity="2000" keep-alive="300" rejection-policy="CALLER_RUNS"/>
+
+    <!-- 安徽電信 通道發送線程池 -->
+    <task:executor id="AH_UNICOM_CHANNEL_Executor" pool-size="100"
+                   queue-capacity="2000" keep-alive="300" rejection-policy="CALLER_RUNS"/>
+
+    <task:executor id="asyncDefaultExecutor" pool-size="1000"
+                   queue-capacity="20000" keep-alive="300" rejection-policy="CALLER_RUNS"/>
+    <task:annotation-driven executor="asyncDefaultExecutor" mode="proxy"/>
+
+</beans>
+
