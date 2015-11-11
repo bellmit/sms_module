@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c) 2015. Lorem ipsum dolor sit amet, consectetur adipiscing elit.                                      ~
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.                       ~
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.                                                  ~
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.                    ~
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.                                                                      ~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <bean id="cacheManagerHandlerAspect" class="com.zy.cache.service.CacheManagerHandlerAspect"/>
+
+    <bean id="merchantPushUrlCacheUpdateService" class="com.zy.cache.service.impl.MerchantPushUrlCacheUpdateService">
+        <property name="cacheSign" value="merchantBandPushUrl"/>
+    </bean>
+    <bean id="cacheManagerHandlerService" class="com.zy.cache.service.CacheManagerHandlerService">
+        <property name="cacheSign" value="commonSign"/>
+        <property name="nextHandler" ref="merchantPushUrlCacheUpdateService"/>
+    </bean>
+
+    <aop:config>
+        <aop:aspect id="cacheManagerHandler" ref="cacheManagerHandlerAspect">
+            <aop:pointcut id="checkJoinPoint" expression="execution(* handlerRequest(..))"/>
+            <aop:after method="handleAspect" pointcut-ref="checkJoinPoint"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
