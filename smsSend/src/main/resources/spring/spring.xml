@@ -12,7 +12,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <import resource="spring-base.xml"/>
-    <!--<import resource="spring-redis.xml"/>-->
+    <import resource="spring-redis.xml"/>
     <import resource="spring-task.xml"/>
 
 </beans>

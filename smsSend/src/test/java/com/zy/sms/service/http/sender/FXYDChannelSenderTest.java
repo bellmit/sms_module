@@ -8,8 +8,11 @@
 
 package com.zy.sms.service.http.sender;
 
+import com.zy.redis.RedisConstant;
+import com.zy.redis.SentinelRedisOperator;
 import com.zy.sms.service.data.IDataManipulation;
 import com.zy.sms.vo.SmsSendDataInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /*********************************************************************************************
  * <pre>
@@ -33,13 +37,14 @@ import java.util.UUID;
 public class FXYDChannelSenderTest
 {
 	private IDataManipulation<SmsSendDataInfo> iDataManipulation;
+	private SentinelRedisOperator              sentinelRedisOperator;
 
 	@Test
 	public void testOperating() throws Exception
 	{
 		try
 		{
-			String[] arr = { "15098648522" /*, "18820238065" , "17001930700" , "17001930700" , "18998561327" , "13686862157" , "13686862157" */ };
+			String[] arr = { "18820238065"  /*, "15098648522" , "17001930700" , "17001930700" , "18998561327" , "13686862157" , "13686862157" */ };
 
 //			for ( int i = 0 ; i < 1000 ; i++ )
 			{
@@ -62,6 +67,39 @@ public class FXYDChannelSenderTest
 		{
 			Thread.sleep( 300000 );
 		}
+	}
+
+	@Test
+	public void testRedisValue()
+	{
+		try
+		{
+			String smsid   = "df9cdae24f9443b7b329c960a6acc612";
+			String account = "chuzhong";
+			System.out.println( sentinelRedisOperator.hset( RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_KEY, smsid, account ) );
+
+			String uuid = StringUtils.replace( UUID.randomUUID().toString(), "-", "" );
+			System.out.println( sentinelRedisOperator.hset( RedisConstant.ZHIYAN_SMS_STATUS_UUID_KEY, smsid, uuid ) );
+
+			ConcurrentHashMap<String, String> data = new ConcurrentHashMap<String, String>();
+			data.put( account, "http://113.31.89.135:19999/zyccreport.do" );
+			System.out.println( sentinelRedisOperator.hmset( RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_PUSH_URL, data ) );
+		}
+		catch ( Exception e )
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public SentinelRedisOperator getSentinelRedisOperator()
+	{
+		return sentinelRedisOperator;
+	}
+
+	@Resource
+	public void setSentinelRedisOperator( SentinelRedisOperator sentinelRedisOperator )
+	{
+		this.sentinelRedisOperator = sentinelRedisOperator;
 	}
 
 	public IDataManipulation<SmsSendDataInfo> getiDataManipulation()
