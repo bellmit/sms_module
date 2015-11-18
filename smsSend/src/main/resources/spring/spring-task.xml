@@ -11,6 +11,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
+    <!-- 天津三網 -->
+    <task:executor id="TJ_SW_CHANNEL_Executor" pool-size="10"
+                   queue-capacity="2000" keep-alive="300" rejection-policy="CALLER_RUNS"/>
+
     <!-- 北京聚通達 通道發送線程池 -->
     <task:executor id="BJ_JTD_CHANNEL_Executor" pool-size="100"
                    queue-capacity="2000" keep-alive="300" rejection-policy="CALLER_RUNS"/>

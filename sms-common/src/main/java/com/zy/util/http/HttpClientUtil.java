@@ -73,8 +73,8 @@ public enum HttpClientUtil
 	{
 		try
 		{
-			PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
-			SocketConfig socketConfig = SocketConfig.custom().setTcpNoDelay( true ).build();
+			PoolingHttpClientConnectionManager connManager  = new PoolingHttpClientConnectionManager();
+			SocketConfig                       socketConfig = SocketConfig.custom().setTcpNoDelay( true ).build();
 			connManager.setDefaultSocketConfig( socketConfig );
 			MessageConstraints messageConstraints = MessageConstraints.custom().setMaxHeaderCount( 200 ).setMaxLineLength( 2000 ).build();
 			ConnectionConfig connectionConfig = ConnectionConfig.custom().setMalformedInputAction( CodingErrorAction.IGNORE )
@@ -108,6 +108,44 @@ public enum HttpClientUtil
 		catch ( Exception e )
 		{
 			logger.error( "HttpClientUtil error : [{}].", e.getMessage(), e );
+		}
+	}
+
+	/**
+	 * 避免特殊字符，請使用 URLEncoder.encode（content,"utf-8"）進行轉換
+	 * JSON,XML 等 格式傳遞參數
+	 * 自定義header
+	 * Create by : 2015年9月2日 下午2:52:24
+	 *
+	 * @param url
+	 * @param msg
+	 * @param headerMap
+	 * @param postType  xml\json ..
+	 *
+	 * @return
+	 *
+	 * @throws Exception
+	 */
+	public String httpPost( String url, String msg, Map<String, String> headerMap, String postType ) throws Exception
+	{
+		try
+		{
+			StringEntity stringEntity = new StringEntity( msg, "utf-8" );// 解决中文乱码问题
+			stringEntity.setContentType( "application/" + postType );
+
+			logger.debug( "json param:{}", msg );
+
+			HttpPost httpPost = new HttpPost( url );
+			httpPost.setEntity( stringEntity );
+
+			setHeader( httpPost, headerMap );
+
+			return doPost( httpPost );
+		}
+		catch ( Exception e )
+		{
+			logger.error( "HttpClientUtil error : [{}].", e.getMessage(), e );
+			throw e;
 		}
 	}
 

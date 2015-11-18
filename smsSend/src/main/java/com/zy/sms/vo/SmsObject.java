@@ -22,22 +22,23 @@ import java.util.Objects;
  *********************************************************************************************/
 public class SmsObject
 {
-	private   String mobile;
-	private   String content;
+	private String mobile;
+	private String content;
 	private String account;
-
-	private String uuid;
+	private String carriers;
+	private String templateId;
 
 	@Override
 	public boolean equals( Object o )
 	{
-
 		if ( this == o ) return true;
 		if ( !( o instanceof SmsObject ) ) return false;
 		SmsObject smsObject = ( SmsObject ) o;
 		return Objects.equals( getMobile(), smsObject.getMobile() ) &&
 			   Objects.equals( getContent(), smsObject.getContent() ) &&
 			   Objects.equals( getAccount(), smsObject.getAccount() ) &&
+			   Objects.equals( getCarriers(), smsObject.getCarriers() ) &&
+			   Objects.equals( getTemplateId(), smsObject.getTemplateId() ) &&
 			   Objects.equals( getUuid(), smsObject.getUuid() ) &&
 			   Objects.equals( getSmsid(), smsObject.getSmsid() );
 	}
@@ -45,8 +46,31 @@ public class SmsObject
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash( getMobile(), getContent(), getAccount(), getUuid(), getSmsid() );
+		return Objects.hash( getMobile(), getContent(), getAccount(), getCarriers(), getTemplateId(), getUuid(), getSmsid() );
 	}
+
+	public String getCarriers()
+	{
+
+		return carriers;
+	}
+
+	public void setCarriers( String carriers )
+	{
+		this.carriers = carriers;
+	}
+
+	public String getTemplateId()
+	{
+		return templateId;
+	}
+
+	public void setTemplateId( String templateId )
+	{
+		this.templateId = templateId;
+	}
+
+	private String uuid;
 
 	public String getSmsid()
 	{
@@ -109,9 +133,11 @@ public class SmsObject
 	{
 		final StringBuilder sb = new StringBuilder( "SmsObject{" );
 		sb.append( "account='" ).append( account ).append( '\'' );
+		sb.append( ", carriers='" ).append( carriers ).append( '\'' );
 		sb.append( ", content='" ).append( content ).append( '\'' );
 		sb.append( ", mobile='" ).append( mobile ).append( '\'' );
 		sb.append( ", smsid='" ).append( smsid ).append( '\'' );
+		sb.append( ", templateId='" ).append( templateId ).append( '\'' );
 		sb.append( ", uuid='" ).append( uuid ).append( '\'' );
 		sb.append( ", super=" ).append( super.toString() );
 		sb.append( '}' );
