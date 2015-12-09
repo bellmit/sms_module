@@ -8,7 +8,7 @@
 
 package com.zy.sms.status.service;
 
-import com.zy.redis.RedisConstant;
+import com.zy.redis.RedisConstantEx;
 import com.zy.redis.SentinelRedisOperator;
 import com.zy.sms.status.cache.SmsStatusPushCache;
 import com.zy.sms.status.service.biz.IPushOperate;
@@ -53,7 +53,7 @@ public class RePushSmsStatusServer
 					try
 					{
 						String accout = it.next();
-						String pushUrl = sentinelRedisOperator.hget( RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_PUSH_URL, accout );
+						String pushUrl = sentinelRedisOperator.hget( RedisConstantEx.ZHIYAN_SMS_STATUS_ACCOUNT_PUSH_URL, accout );
 						String pushStatus = SmsStatusPushCache.getSmsStatus( accout );
 
 						logger.info( "REPUSH Merchant account :->" + accout );

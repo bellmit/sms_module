@@ -8,7 +8,7 @@
 
 package com.zy.sms.service.http.sender;
 
-import com.zy.redis.RedisConstant;
+import com.zy.redis.RedisConstantEx;
 import com.zy.redis.SentinelRedisOperator;
 import com.zy.sms.service.data.IDataManipulation;
 import com.zy.sms.vo.SmsSendDataInfo;
@@ -76,14 +76,14 @@ public class FXYDChannelSenderTest
 		{
 			String smsid   = "df9cdae24f9443b7b329c960a6acc612";
 			String account = "chuzhong";
-			System.out.println( sentinelRedisOperator.hset( RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_KEY, smsid, account ) );
+			System.out.println( sentinelRedisOperator.hset( RedisConstantEx.ZHIYAN_SMS_STATUS_ACCOUNT_KEY, smsid, account ) );
 
 			String uuid = StringUtils.replace( UUID.randomUUID().toString(), "-", "" );
-			System.out.println( sentinelRedisOperator.hset( RedisConstant.ZHIYAN_SMS_STATUS_UUID_KEY, smsid, uuid ) );
+			System.out.println( sentinelRedisOperator.hset( RedisConstantEx.ZHIYAN_SMS_STATUS_UUID_KEY, smsid, uuid ) );
 
 			ConcurrentHashMap<String, String> data = new ConcurrentHashMap<String, String>();
 			data.put( account, "http://113.31.89.135:19999/zyccreport.do" );
-			System.out.println( sentinelRedisOperator.hmset( RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_PUSH_URL, data ) );
+			System.out.println( sentinelRedisOperator.hmset( RedisConstantEx.ZHIYAN_SMS_STATUS_ACCOUNT_PUSH_URL, data ) );
 		}
 		catch ( Exception e )
 		{

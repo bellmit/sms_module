@@ -8,7 +8,7 @@
 
 package com.zy.sms.status.service.impl;
 
-import com.zy.redis.RedisConstant;
+import com.zy.redis.RedisConstantEx;
 import com.zy.redis.SentinelRedisOperator;
 import com.zy.sms.status.cache.SmsStatusPushCache;
 import com.zy.sms.status.service.HttpServerFactory;
@@ -95,7 +95,7 @@ public abstract class CatchStatusServerImpl extends HttpServerFactory implements
 		logger.info( "開始更新{}狀態報告結果至數據緩存中....", channelName );
 		long           startTime = System.currentTimeMillis();
 		final int      size      = rsList.size();
-		String         redisKey  = String.format( RedisConstant.ZHIYAN_SMS_STATUS_REPO_KEY, channelCode );
+		String         redisKey  = String.format( RedisConstantEx.ZHIYAN_SMS_STATUS_REPO_KEY, channelCode );
 		List<StatusVo> voList    = new LinkedList<StatusVo>();
 		try
 		{
@@ -195,7 +195,7 @@ public abstract class CatchStatusServerImpl extends HttpServerFactory implements
 	private void pushStatus( Map<String, String> data )
 	{
 
-		List<String> list = sentinelRedisOperator.hmget( new LinkedList<String>( data.keySet() ), RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_PUSH_URL );
+		List<String> list = sentinelRedisOperator.hmget( new LinkedList<String>( data.keySet() ), RedisConstantEx.ZHIYAN_SMS_STATUS_ACCOUNT_PUSH_URL );
 
 		int idx = 0;
 		for ( Map.Entry<String, String> entry : data.entrySet() )
@@ -206,7 +206,7 @@ public abstract class CatchStatusServerImpl extends HttpServerFactory implements
 			try
 			{
 				String pushUrl = list.get( idx );
-//				String pushUrl = sentinelRedisOperator.phget( RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_PUSH_URL, accout );
+//				String pushUrl = sentinelRedisOperator.phget( RedisConstantEx.ZHIYAN_SMS_STATUS_ACCOUNT_PUSH_URL, accout );
 				callPushServer( accout, pushStatus, pushUrl );
 			}
 			catch ( Exception e )
@@ -272,7 +272,7 @@ public abstract class CatchStatusServerImpl extends HttpServerFactory implements
 		final List<String> listAccount = getListAccount( keyList );
 		if ( listAccount == null ) return;
 
-		final List<String> listUUID = sentinelRedisOperator.hmget( keyList, RedisConstant.ZHIYAN_SMS_STATUS_UUID_KEY );
+		final List<String> listUUID = sentinelRedisOperator.hmget( keyList, RedisConstantEx.ZHIYAN_SMS_STATUS_UUID_KEY );
 
 		for ( int i = 0 ; i < endIdx ; i++ )
 		{
@@ -304,7 +304,7 @@ public abstract class CatchStatusServerImpl extends HttpServerFactory implements
 
 	private List<String> getListAccount( List<String> keyList )
 	{
-		final List<String> listAccount = sentinelRedisOperator.hmget( keyList, RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_KEY );
+		final List<String> listAccount = sentinelRedisOperator.hmget( keyList, RedisConstantEx.ZHIYAN_SMS_STATUS_ACCOUNT_KEY );
 		if ( listAccount.isEmpty() )
 		{
 			logger.warn( "緩存系統沒有查到相關消息ID對應的賬戶信息." );

@@ -12,7 +12,7 @@ import com.zy.cache.dao.MerchantUrlIpMapper;
 import com.zy.cache.entity.MerchantUrlIpEntity;
 import com.zy.cache.exception.CacheManagerException;
 import com.zy.cache.service.CacheManagerAbstractHandler;
-import com.zy.redis.RedisConstant;
+import com.zy.redis.RedisConstantEx;
 import com.zy.redis.SentinelRedisOperator;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.scheduling.annotation.Async;
@@ -102,7 +102,7 @@ public class MerchantPushUrlCacheUpdateService extends CacheManagerAbstractHandl
 //			logger.info( "==={}===", jsonString );
 //			data.put( entity.getMerchantAccount(),jsonString );
 //		}
-//		pipelined.hmset( RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_BAND, data );
+//		pipelined.hmset( RedisConstantEx.ZHIYAN_SMS_STATUS_ACCOUNT_BAND, data );
 
 		updateDataToCache( entityList, pipelined, "ip" );
 		updateDataToCache( entityList, pipelined, "url" );
@@ -119,9 +119,9 @@ public class MerchantPushUrlCacheUpdateService extends CacheManagerAbstractHandl
 			else data.put( entity.getMerchantAccount(), String.valueOf( entity.getIsValideIp() ) );
 		}
 
-		if ( dataCache.equals( "ip" ) ) pipelined.hmset( RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_BAND_IP, data );
-		else if ( dataCache.equals( "url" ) ) pipelined.hmset( RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_PUSH_URL, data );
-		else pipelined.hmset( RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_BAND_IP_VALID, data );
+		if ( dataCache.equals( "ip" ) ) pipelined.hmset( RedisConstantEx.ZHIYAN_SMS_STATUS_ACCOUNT_BAND_IP, data );
+		else if ( dataCache.equals( "url" ) ) pipelined.hmset( RedisConstantEx.ZHIYAN_SMS_STATUS_ACCOUNT_PUSH_URL, data );
+		else pipelined.hmset( RedisConstantEx.ZHIYAN_SMS_STATUS_ACCOUNT_BAND_IP_VALID, data );
 	}
 
 	public MerchantUrlIpMapper getMerchantUrlIpMapper()

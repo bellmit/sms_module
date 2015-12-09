@@ -9,7 +9,7 @@
 package com.zy.cache.service.test;
 
 import com.zy.cache.entity.MerchantAccountEntity;
-import com.zy.redis.RedisConstant;
+import com.zy.redis.RedisConstantEx;
 import com.zy.redis.SentinelRedisOperator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -66,16 +66,16 @@ public class SmsSendMockService
 
 			logger.debug( "賬戶:{} 發送消息成功，返回消息ID：{} ，用戶UUID：{}.", entity.getMerchantAccount(), smsid, uuid );
 
-			Long uuidR = sentinelRedisOperator.hset( RedisConstant.ZHIYAN_SMS_STATUS_UUID_KEY, smsid, uuid );
+			Long uuidR = sentinelRedisOperator.hset( RedisConstantEx.ZHIYAN_SMS_STATUS_UUID_KEY, smsid, uuid );
 			if ( uuidR.intValue() == 0 )
 			{
-				logger.info( "插入uuid失敗.=key={}=smsid={}=uuid={}.", RedisConstant.ZHIYAN_SMS_STATUS_UUID_KEY, smsid, uuid );
+				logger.info( "插入uuid失敗.=key={}=smsid={}=uuid={}.", RedisConstantEx.ZHIYAN_SMS_STATUS_UUID_KEY, smsid, uuid );
 				return;
 			}
-			Long accountR = sentinelRedisOperator.hset( RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_KEY, smsid, entity.getMerchantAccount() );
+			Long accountR = sentinelRedisOperator.hset( RedisConstantEx.ZHIYAN_SMS_STATUS_ACCOUNT_KEY, smsid, entity.getMerchantAccount() );
 			if ( accountR.intValue() == 0 )
 			{
-				logger.info( "插入賬戶失敗。==key={}==smsid=={}==account=={}==", RedisConstant.ZHIYAN_SMS_STATUS_ACCOUNT_KEY, smsid, entity.getMerchantAccount() );
+				logger.info( "插入賬戶失敗。==key={}==smsid=={}==account=={}==", RedisConstantEx.ZHIYAN_SMS_STATUS_ACCOUNT_KEY, smsid, entity.getMerchantAccount() );
 				return;
 			}
 			copyOnWriteArrayList.add( smsid );

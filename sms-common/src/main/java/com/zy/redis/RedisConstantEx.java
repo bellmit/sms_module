@@ -10,7 +10,7 @@ package com.zy.redis;
 
 /*********************************************************************************************
  * <pre>
- *     FileName: com.zy.redis.RedisConstant
+ *     FileName: com.zy.redis.RedisConstantEx
  *         Desc:
  *       author: Z_Z.W - myhongkongzhen@gmail.com
  *      version: 2015-10-08 16:59
@@ -18,7 +18,7 @@ package com.zy.redis;
  *      History:
  * </pre>
  *********************************************************************************************/
-public class RedisConstant
+public class RedisConstantEx
 {
 	public static final String REDIS_SPLIT_STRING = "::";
 
@@ -57,7 +57,7 @@ public class RedisConstant
 
 	public static final String ZHIYAN_SMS_STATUS_ACCOUNT_BAND = ZHIYAN_STATUS_KEY_PREFIX + "ACCOUNT" + REDIS_SPLIT_STRING + "BAND";
 
-	private RedisConstant()
+	private RedisConstantEx()
 	{
 	}
 }
